@@ -31,7 +31,7 @@
                 var newValue = document.getElementById('name').value;
                 var id = document.getElementById("idProducto").getAttribute("value");
                 $.ajax({
-                    url: 'http://localhost:8080/api/products/' + id,
+                    url: 'api/products/' + id,
                     type: 'PUT',
                     data: {
                         name: newValue
@@ -46,7 +46,7 @@
             function deleteProduct() {
                 var id = document.getElementById("idProducto").getAttribute("value");
                 $.ajax({
-                    url: 'http://localhost:8080/api/products/' + id,
+                    url: 'api/products/' + id,
                     type: 'DELETE',
                     success: function(result) {
                         alert('Producto borrado');
@@ -57,7 +57,7 @@
             function newProduct() {
                 var newValue = document.getElementById('name').value;
                 $.ajax({
-                    url: 'http://localhost:8080/api/products',
+                    url: 'api/products',
                     type: 'POST',
                     data: {
                         name: newValue

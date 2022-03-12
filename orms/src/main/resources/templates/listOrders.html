@@ -38,7 +38,7 @@
     function addProduct(orderId,productId,quantity=1) {
             
             $.ajax({
-                url: `http://localhost:8080/api/orders/${orderId}/products?productId=${productId}&quantity=${quantity}`,
+                url: `api/orders/${orderId}/products?productId=${productId}&quantity=${quantity}`,
                 type: 'POST',
                 data: {
                     
@@ -51,7 +51,7 @@
         }
     function deleteProduct(orderId,productId){
         $.ajax({
-            url: `http://localhost:8080/api/orders/${orderId}/products/${productId}`,
+            url: `api/orders/${orderId}/products/${productId}`,
             type: 'DELETE',
             data: {
                 
