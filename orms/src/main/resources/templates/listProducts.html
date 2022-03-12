@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{fragments/changelang.html :: head}"></head>
+    <header th:insert="~{fragments/changelang.html :: header}">
+        <!-- Add ajax -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </header>
+    <body th:object="${products}">
+        <div th:each="product: ${products}" th:object="${product}">
+            <p th:text="*{name}"></p>
+            <p th:text="*{price}"></p>
+            <img th:src="*{imageUrl}"></img>
+    </body>
+</html>

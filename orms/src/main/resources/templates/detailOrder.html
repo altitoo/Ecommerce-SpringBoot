@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{fragments/changelang.html :: head}"></head>
+    <header th:insert="~{fragments/changelang.html :: header}">
+        
+        <!-- Add ajax -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+    </header>
+    <body>
+        
+        <div th:each="order : ${orders}" th:object="${order}" >
+            <h1 th:text="#{order} + ' ' +  *{id}"></h1>
+            <h5 th:text=" 'Username: '+ *{userName}"></h5>
+            <h5 th:text="'CreationDate: '+ *{createdAt}"></h5>
+            <h5 th:text="'State: '+ *{State}"></h5>
+            <h5 th:text="'TotalPrice: '+ *{totalPrice}"></h5>
+        </div>
+    </body>
+</html>

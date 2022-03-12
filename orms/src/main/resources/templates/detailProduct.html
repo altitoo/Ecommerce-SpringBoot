@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{fragments/changelang.html :: head}"></head>
+    <header th:insert="~{fragments/changelang.html :: header}">
+        
+        <!-- Add ajax -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+    </header>
+    <body th:object="${product}">
+        <p th:text="*{id}"></p>
+        <!--- New Product -->
+        <div th:if="*{id} == 0 OR *{id} == null">
+                <span th:text="'Introduce un nuevo producto '"></span>
+                <input th:field="*{name}">
+                <button onclick="newProduct()" > Create </button>
+            </form>   
+           
+        </div>
+        <!--- Edit Product -->
+        <div th:if="*{id} != 0 AND *{id} != null">
+                <span id="idProducto" th:text="'Editar producto ' + *{name}" th:value="*{id}"></span>
+                <input  th:field="*{name}">
+                <button onclick="editProduct()" > Edit </button>
+                <button onclick="deleteProduct()"> Delete </button>
+            </form>
+        </div>
+        <script>
+            // put request to change name product
+            function editProduct() {
+                
+                var newValue = document.getElementById('name').value;
+                var id = document.getElementById("idProducto").getAttribute("value");
+                $.ajax({
+                    url: 'http://localhost:8080/api/products/' + id,
+                    type: 'PUT',
+                    data: {
+                        name: newValue
+                    },
+                    success: function(result) {
+                        alert('Producto editado');
+                        window.location.replace('/products/edit/' + id);
+                    }
+                });
+                
+            }
+            function deleteProduct() {
+                var id = document.getElementById("idProducto").getAttribute("value");
+                $.ajax({
+                    url: 'http://localhost:8080/api/products/' + id,
+                    type: 'DELETE',
+                    success: function(result) {
+                        alert('Producto borrado');
+                        window.location.replace('/products/list');
+                    }
+                });
+            }
+            function newProduct() {
+                var newValue = document.getElementById('name').value;
+                $.ajax({
+                    url: 'http://localhost:8080/api/products',
+                    type: 'POST',
+                    data: {
+                        name: newValue
+                    },
+                    success: function(result) {
+                        alert('Producto creado');
+                        window.location.replace('/products/list');
+                    }
+                });
+            }
+            
+        </script>
+    </body>
+</html>

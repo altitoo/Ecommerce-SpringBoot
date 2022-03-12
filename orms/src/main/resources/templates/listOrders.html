@@ -1,0 +1,66 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="~{fragments/changelang.html :: head}">
+</head>
+<header th:insert="~{fragments/changelang.html :: header}">
+</header>
+
+<body>
+    <h1 th:text="#{orders}" class="text-center"></h1>
+    <ul th:class="list-group" style="display: flex; flex-direction: columns ; align-items: center;">
+        <li th:each=" order : ${orders} " th:object="${order}" class="col" style="border: solid 1px red;">
+            <a th:href="@{|/orders/${order.id}|}">
+                <span th:text="'Id Order: '+*{id}"></span>
+            </a>
+            <span th:text="'Date: '+*{createdAt}"></span>
+           
+            <span th:text="'Status: '+*{state}"></span>
+            <div th:each=" orderProduct : *{orderProducts}" th:object="${orderProduct}" class="col">
+                <div th:if="*{quantity} > 0">
+                    <span th:text="${orderProduct.quantity}"></span>
+                    <span th:text="${orderProduct.product.name}"></span>
+                    <span th:text="${orderProduct.product.price}"> $ </span>
+                    <img th:src="${orderProduct.product.imageUrl}"></img>
+                    <a th:attr="onclick=|addProduct(${order.id},${orderProduct.product.id})|">
+                        <button> + </button>
+                    </a>
+                    <a th:attr="onclick=|deleteProduct(${order.id},${orderProduct.product.id})|">
+                        <button>  -  </button>
+                    </a>
+                </div>
+
+            </div>
+            <span th:text="'Total : '+*{totalPrice}+'$'"></span>
+        </li>
+    </ul>
+</body>
+<script>
+    function addProduct(orderId,productId,quantity=1) {
+            
+            $.ajax({
+                url: `http://localhost:8080/api/orders/${orderId}/products?productId=${productId}&quantity=${quantity}`,
+                type: 'POST',
+                data: {
+                    
+                },
+                success: function(result) {
+                   
+                    window.location.replace('/orders/view');
+                }
+            });
+        }
+    function deleteProduct(orderId,productId){
+        $.ajax({
+            url: `http://localhost:8080/api/orders/${orderId}/products/${productId}`,
+            type: 'DELETE',
+            data: {
+                
+            },
+            success: function(result) {
+               
+                window.location.replace('/orders/view');
+            }
+        });
+    }
+</script>
+</html>
