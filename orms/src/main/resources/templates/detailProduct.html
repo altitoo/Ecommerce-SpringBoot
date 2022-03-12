@@ -31,14 +31,14 @@
                 var newValue = document.getElementById('name').value;
                 var id = document.getElementById("idProducto").getAttribute("value");
                 $.ajax({
-                    url: 'api/products/' + id,
+                    url: 'https://ecommerce-java.azurewebsites.net/api/products/' + id,
                     type: 'PUT',
                     data: {
                         name: newValue
                     },
                     success: function(result) {
                         alert('Producto editado');
-                        window.location.replace('/products/edit/' + id);
+                        window.location.replace(`/products/edit/{id}`);
                     }
                 });
                 
@@ -46,25 +46,25 @@
             function deleteProduct() {
                 var id = document.getElementById("idProducto").getAttribute("value");
                 $.ajax({
-                    url: 'api/products/' + id,
+                    url: 'https://ecommerce-java.azurewebsites.net/api/products/' + id,
                     type: 'DELETE',
                     success: function(result) {
                         alert('Producto borrado');
-                        window.location.replace('/products/list');
+                        window.location.replace('/');
                     }
                 });
             }
             function newProduct() {
                 var newValue = document.getElementById('name').value;
                 $.ajax({
-                    url: 'api/products',
+                    url: 'https://ecommerce-java.azurewebsites.net/api/products',
                     type: 'POST',
                     data: {
                         name: newValue
                     },
                     success: function(result) {
                         alert('Producto creado');
-                        window.location.replace('/products/list');
+                        window.location.replace('/');
                     }
                 });
             }
