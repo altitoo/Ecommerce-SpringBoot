@@ -76,15 +76,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repository>
-		<id>simple-demo-feed</id>
-		<url>https://pkgs.dev.azure.com/GradoSuperior/RETO-2-ECOMMERCE/_packaging/simple-demo-feed/maven/v1</url>
-		<releases>
-			<enabled>true</enabled>
-		</releases>
-		<snapshots>
-			<enabled>true</enabled>
-		</snapshots>
-	</repository>
+	
 
 </project>
